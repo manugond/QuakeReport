@@ -23,30 +23,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EarthquakeActivity extends AppCompatActivity {
+    public static final String LOG_TAG = EarthquakeActivity.class.getName();
     private static final String USGS_REQUEST_URL =
             "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson";
-    public static final String LOG_TAG = EarthquakeActivity.class.getName();
-    EarthquakeAdapter mAdapter;
+    static EarthquakeAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
-        ListView earthquakeListView = (ListView) findViewById(R.id.list);
+        ListView earthquakeListView = findViewById(R.id.list);
         // Create a new adapter that takes an empty list of earthquakes as input
         mAdapter = new EarthquakeAdapter(this, new ArrayList<Earthquake>());
         // Set the adapter on the {@link ListView}
@@ -63,9 +55,14 @@ public class EarthquakeActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 // Find the current earthquake that was clicked on
                 Earthquake currentEarthquake = mAdapter.getItem(position);
+                Uri earthquakeUri = Uri.EMPTY;
+                try {
+                    // Convert the String URL into a URI object (to pass into the Intent constructor)
+                    earthquakeUri = Uri.parse(currentEarthquake.getUrl());
+                } catch (NullPointerException e) {
 
-                // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri earthquakeUri = Uri.parse(currentEarthquake.getUrl());
+                    Log.d(LOG_TAG, "Can't get url");
+                }
 
                 // Create a new intent to view the earthquake URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
@@ -76,7 +73,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         });
     }
 
-    private class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>> {
+    private static class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>> {
 
         /**
          * This method runs on a background thread and performs the network request.
@@ -88,10 +85,10 @@ public class EarthquakeActivity extends AppCompatActivity {
             // Don't perform the request if there are no URLs, or the first URL is null.
             if (urls.length < 1 || urls[0] == null) {
                 return null;
+            } else {
+                List<Earthquake> result = QueryUtils.fetchEarthquakeData(urls[0]);
+                return result;
             }
-
-            List<Earthquake> result = QueryUtils.fetchEarthquakeData(urls[0]);
-            return result;
         }
 
         @Override
