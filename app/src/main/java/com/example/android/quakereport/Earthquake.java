@@ -8,10 +8,13 @@ public class Earthquake {
     double magnitude;
     long date;
     String place;
-    public Earthquake(String p,long d,double m){
+    String url;
+
+    public Earthquake(double m, String p, long d, String u) {
         magnitude=m;
         date=d;
         place=p;
+        url = u;
     }
     public String getMagnitude(){
         return  Double.toString(magnitude);
@@ -21,5 +24,9 @@ public class Earthquake {
     }
     public long getTimeInMilliseconds(){
         return date;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }
