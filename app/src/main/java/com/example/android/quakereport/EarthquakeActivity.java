@@ -36,6 +36,7 @@ import java.util.List;
 
 public class EarthquakeActivity extends AppCompatActivity implements LoaderCallbacks<List<Earthquake>> {
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
+    //url to get earthquakes of the month
     private static final String USGS_REQUEST_URL =
             "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson";
     static EarthquakeAdapter mAdapter;
