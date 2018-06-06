@@ -12,7 +12,7 @@ https://earthquake.usgs.gov/fdsnws/event/1/
 #ScreenShot
 Screenshot in a xxhdpi android phone
 
-![alt text](https://github.com/manugond/ud843-QuakeReport/blob/master/Screenshot01.png)
+![alt text](https://github.com/manugond/ud843-QuakeReport/blob/starting-point/Screenshot1.png)
 
 Pre-requisites
 --------------
