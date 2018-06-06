@@ -9,7 +9,7 @@ Used in a Udacity course in the Beginning Android Nanodegree.
 More info on the USGS Earthquake API available at:
 https://earthquake.usgs.gov/fdsnws/event/1/
 
-#ScreenShot
+##ScreenShot
 Screenshot in a xxhdpi android phone
 
 ![alt text](https://github.com/manugond/ud843-QuakeReport/blob/starting-point/Screenshot1.png)
