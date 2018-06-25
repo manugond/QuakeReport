@@ -9,6 +9,20 @@ Used in a Udacity course in the Beginning Android Nanodegree.
 More info on the USGS Earthquake API available at:
 https://earthquake.usgs.gov/fdsnws/event/1/
 
+##
+About Gradle
+=================================
+Latest update of Android Studio made use of "compile" invalid in gradle build, it has been replaced by "implement", if you are forking this respo, and still find error with gradle sync, then create a new project with min supported API of Android Lollipop and copy the gradle script of that app into this one(It will solve the problem).
+
+
+##
+ToDo
+==========================
+* [ ] Update the app with spinner to select the earthquakes based on month, week, or year.
+* [ ] Add support of searching of location 
+* [ ] Merge features of DidYouFeelIt app, so user can look at number of audience that felt the earthquake
+
+
 
 ##
 ScreenShot
